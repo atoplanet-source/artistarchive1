@@ -55,22 +55,25 @@
 
   // Start with everything hidden, then animate in sequence
   window.addEventListener('load', () => {
-    // Step 1: Logo fades in after 300ms
+    // Step 1: Logo starts filled in (visible), then scales up slowly
     setTimeout(() => {
       if (heroLogo) {
-        heroLogo.style.transition = 'opacity 1.2s ease, transform 1.2s ease';
-        heroLogo.style.opacity = '1';
-        heroLogo.style.transform = 'scale(1)';
+        heroLogo.style.opacity = '1'; // Start filled in
+        heroLogo.style.transform = 'scale(0.9)'; // Start slightly smaller
+        heroLogo.style.transition = 'transform 3s ease-out'; // Slow scale animation
+        // Trigger reflow then animate
+        heroLogo.offsetHeight;
+        heroLogo.style.transform = 'scale(1.15)'; // Scale up larger
       }
     }, 300);
 
-    // Step 2: Tagline fades in after logo
+    // Step 2: Tagline fades in after logo animation
     setTimeout(() => {
       if (heroTagline) {
-        heroTagline.style.transition = 'opacity 1s ease';
+        heroTagline.style.transition = 'opacity 1.5s ease';
         heroTagline.style.opacity = '1';
       }
-    }, 1200);
+    }, 2500);
 
     // Step 3: Navbar elements fade in
     setTimeout(() => {
@@ -86,7 +89,7 @@
         menuBtn.style.transition = 'opacity 0.8s ease';
         menuBtn.style.opacity = '1';
       }
-    }, 1800);
+    }, 3500);
   });
 })();
 
